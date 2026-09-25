@@ -7,22 +7,25 @@
                 <div class="card shadow-sm p-3">
                     <div class="card-header">
                         <h5 class="card-title fw-bold">
-                            Tambah Data Pemasukan
+                            Edit Data Pengeluaran 
                         </h5>
                     </div>
                     <div class="card-body">
                         <!-- Form -->
-                        <form action="{{ route('incomes.insert') }}" method="POST">
+                        <form action="{{ route('expenses.update', $expense->id_expense) }}" method="POST">
                             @csrf
+                            @method('PUT')
 
-                            <!-- Kategori -->
                             <div class="form-group">
                                 <label for="id_category">Kategori</label>
                                 <select class="form-control @error('id_category') is-invalid @enderror" id="id_category"
                                     name="id_category">
                                     <option value="">Pilih Kategori</option>
                                     @foreach ($categories as $category)
-                                        <option value="{{ $category->id_category }}">{{ $category->name_category }}</option>
+                                        <option value="{{ $category->id_category }}"
+                                            {{ $expense->id_category == $category->id_category ? 'selected' : '' }}>
+                                            {{ $category->name_category }}
+                                        </option>
                                     @endforeach
                                 </select>
                                 @error('id_category')
@@ -30,38 +33,34 @@
                                 @enderror
                             </div>
 
-                            <!-- Date -->
-                            <div class="form-group">
-                                <label for="date">Tanggal</label>
-                                <input type="date" class="form-control @error('date') is-invalid @enderror"
-                                    id="date" name="date" value="{{ old('date') }}">
-                                @error('date')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                            </div>
-
-                            <!-- Amount -->
                             <div class="form-group">
                                 <label for="amount">Jumlah</label>
                                 <input type="text" class="form-control @error('amount') is-invalid @enderror"
-                                    id="amount" name="amount" value="{{ old('amount') }}">
+                                    id="amount" name="amount" value="{{ $expense->amount }}">
                                 @error('amount')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
 
-                            <!-- Descriptions -->
                             <div class="form-group">
                                 <label for="description">Deskripsi</label>
-                                <textarea class="form-control @error('description') is-invalid @enderror" required id="description" name="description">{{ old('description') }}</textarea>
+                                <textarea class="form-control @error('description') is-invalid @enderror" id="description" name="description">{{ $expense->description }}</textarea>
                                 @error('description')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
 
-                            <!-- Action Buttons -->
-                            <button type="submit" class="btn btn-sm btn-success">Simpan</button>
-                            <a href="{{ route('incomes') }}" class="btn btn-sm btn-secondary">Kembali</a>
+                            <div class="form-group">
+                                <label for="date">Tanggal</label>
+                                <input type="date" class="form-control @error('date') is-invalid @enderror"
+                                    id="date" name="date" value="{{ $expense->date }}">
+                                @error('date')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+
+                            <button type="submit" class="btn btn-sm btn-success">Perbarui</button>
+                            <a href="{{ route('expenses') }}" class="btn btn-sm btn-secondary">Kembali</a>
                         </form>
                     </div>
                 </div>

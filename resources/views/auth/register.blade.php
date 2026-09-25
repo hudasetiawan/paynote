@@ -9,7 +9,9 @@
                 <div class="card o-hidden border-0 shadow-lg my-5">
                     <div class="card-body p-0">
                         <div class="row">
-                            <div class="col-lg-6 d-none d-lg-block bg-register-image"></div>
+                            <div class="col-lg-6 d-none d-lg-block bg-register-image">
+                                <img src="{{ asset('img/register.png')}}" class="img-thumbnail borner border-0" alt="">
+                            </div>
                             <div class="col-lg-6 px-5 pb-4">
                                 <div class="p-5">
                                     <div class="text-center">

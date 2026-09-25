@@ -13,7 +13,11 @@ class Expenses extends Model
 
     // Fill Tabel
     protected $fillable = [
-        'amount', 'description', 'date', 'id_category', 'created_at'
+        'amount',
+        'description',
+        'date',
+        'id_category',
+        'created_at'
     ];
 
     // Get All Data
@@ -23,10 +27,11 @@ class Expenses extends Model
     }
 
     // Get Data by ID
-    public static function getById($id)
+    public static function getById($id_expense)
     {
-        return Expenses::where('id_expense', $id)->first();
+        return Expenses::where('id_expense', $id_expense)->first();
     }
+
 
     // Insert Data
     public static function insert($data)

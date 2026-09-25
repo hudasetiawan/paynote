@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Models;
+
 use Illuminate\Database\Eloquent\Model;
 
 class Balance extends Model
@@ -11,11 +12,13 @@ class Balance extends Model
 
     // Table Pemasukan dan Pengeluaran
     protected $incomesTable = 'incomes';
-    protected $expensesTable = 'expenses'; 
+    protected $expensesTable = 'expenses';
 
     // Fill Table
     protected $fillable = [
-        'amount', 'description', 'updated_at'
+        'amount',
+        'description',
+        'updated_at'
     ];
 
     // Get All Data
@@ -33,9 +36,11 @@ class Balance extends Model
     // Total Balance
     public static function totalBalance()
     {
-        $totalBalance = Balance::sum('amount');
-        return $totalBalance;
+        $totalIncomes = Incomes::sum('amount');
+        $totalExpenses = Expenses::sum('amount');
+        return $totalIncomes - $totalExpenses;
     }
+
 
     // Mengambil semua data pemasukan dan pengeluaran
     public static function getAllIncomesAndExpenses()

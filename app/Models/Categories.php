@@ -10,9 +10,13 @@ class Categories extends Model
     protected $table = 'categories';
     public $timestamps = false;
 
+    // Menentukan kolom primary key
+    protected $primaryKey = 'id_category'; // Tentukan kolom primary key sesuai dengan struktur tabel Anda
+
     // Mass Assignment
     protected $fillable = [
-        'name_category'
+        'name_category',
+        'type', // Kolom baru untuk tipe kategori (income/expense)
     ];
 
     // Get All Data
@@ -50,4 +54,11 @@ class Categories extends Model
     {
         return Categories::count();
     }
+
+    // Get Categories by Type
+    public static function getByType($type)
+    {
+        return Categories::where('type', $type)->get();
+    }
 }
+
